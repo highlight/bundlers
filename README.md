@@ -1,2 +1,17 @@
 # bundlers
 Comparison of common library bundlers.
+
+## Converting Package to Type Module Discussed
+Vadim discussed the process of converting the customer's package into a type module, which changes how Node or the runtime evaluates code and dependencies. He explained that this method uses a type module, rather than a common JavaScript module or package. Vadim also compared the experience of setting up different bundles and mentioned that they need to transpile the code into JavaScript to ensure it compiles. He later encountered issues with Webpack's es module support and decided to try another bundling tool. Vadim also highlighted the importance of understanding the output of the bundler, noting that it handles dependencies.
+
+## Resolving Dependencies in Building a Library
+Vadim discussed the process of resolving dependencies when building a library. He explained how dependencies can be included in the library or kept as imports, and how the runtime would figure out how to find them. Vadim also mentioned the need to bundle their dependencies into the build to make modifications to the dependencies. He noted that this was necessary due to some broken logic in the dependencies of open telemetry that was not compatible with modern JavaScript syntax, and that they needed to apply patches to their dependencies.
+
+## Transforming Dependencies for ES Module Formats
+Vadim discussed the need for transforming dependencies into ES module and common.js compatible formats. He explained the use of a consistent setup based on 'tsconfig.json' for defining the syntax of the JavaScript that would be emitted. The team acknowledged that Webpack doesn't properly support ES build and it's less maintained than some other options. Vadim also touched upon issues faced while using 'vet' due to its library mode not being optimized for Node.js syntax. He suggested the use of 'yes' build by default and 'roll-up' for some of the bundling, noting that 'roll-up' is more customizable. The team also explored the pros and cons of various configuration methods and faced issues while using certain libraries. Finally, Vadim suggested the use of Tsub, a more recent library for bundling typescript, but faced issues with it due to open telemetry. He concluded by noting that rollup serves as a potential solution and is widely used due to its ease of setup.
+
+## Code Test Results and Bundling Method Discussion
+Vadim and Chris discussed the results of a test involving their code and a new bundling method. Vadim explained the process and noted that it took around the same time as Vit's method, and they successfully executed their code using open telemetry. Chris expressed his excitement at the solution and acknowledged the effort it took to switch build systems. Vadim also mentioned that he had put the test results in a repository and suggested it could be used as a benchmark for future testing.
+
+## Open Telemetry vs Import/Require & ESM Challenges
+The team discussed the use of open telemetry and the mixing of import and require in a single file. Chris explained the differences between the two methods and how they are used in the library. The group also discussed the challenges of transitioning to es modules and how it affects their customer base. In the end, Vadim suggested an experiment to test the effects of different bundles on importing files with require and import. The team also touched on the topic of Asyn hooks and its potential impact on their workflow.
