@@ -1,0 +1,49 @@
+name: Monorepo
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
+  merge_group:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+jobs:
+  javascript:
+    name: Build and Run Javascript
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint:check
+
+      - name: Run rollup build
+        run: pnpm build:rollup && pnpm start && pnpm start:cjs
+
+      - name: Run tsup build
+        run: pnpm build:tsup && pnpm start && pnpm start:cjs
+
+      - name: Run vite build
+        run: pnpm build:vite
+
+      - name: Run webpack build
+        run: pnpm build:webpack && pnpm start:cjs

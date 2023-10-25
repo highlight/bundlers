@@ -1,0 +1,51 @@
+{
+  "name": "compare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "build:rollup": "rollup -c rollup.config.js",
+    "build:tsup": "tsup",
+    "build:vite": "vite build",
+    "build:webpack": "webpack",
+    "lint": "pnpm run lint:base -w",
+    "lint:base": "prettier src *.ts *.js",
+    "lint:check": "pnpm run lint:base -c",
+    "start": "node dist/index.js",
+    "start:cjs": "node dist/index.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "prettier": "^3.0.3",
+    "rollup": "^4.1.4",
+    "ts-loader": "^9.5.0",
+    "tslib": "^2.6.2",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vite-plugin-node-polyfills": "^0.15.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.6.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.39.4",
+    "@opentelemetry/exporter-trace-otlp-proto": "^0.44.0",
+    "@opentelemetry/resources": "^1.17.1",
+    "@opentelemetry/sdk-node": "^0.44.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "ansi-color@0.2.1": "patches/ansi-color@0.2.1.patch"
+    }
+  }
+}
